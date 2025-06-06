@@ -8,7 +8,7 @@ A comprehensive web-based School Management System designed to streamline school
 
 ## Features
 
-### 🏫 Core Modules
+###  Core Modules
 - **Student Management**
   - Add/edit/remove student profiles
   - Class promotion and demotion
@@ -26,12 +26,12 @@ A comprehensive web-based School Management System designed to streamline school
   - Timetable scheduling // to be added
  
 
-### 💰 Financial Management
+###  Financial Management
 - Fee structure configuration
 - Payment receipts and invoices
 - Financial reports and analytics // not entirely detailedbut will be done soon
 
-### 📊 Reporting & Analytics
+###  Reporting & Analytics
 - Automated report card generation
 - Student performance analyti
 
