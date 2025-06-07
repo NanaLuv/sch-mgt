@@ -7,6 +7,7 @@ import {
   FiTrash2,
   FiX,
   FiDownload,
+  FiInfo,
 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import Notification from "../other-components/notification";
@@ -24,6 +25,7 @@ export default function Expenses() {
   const [addExpenseForm, setAddExpenseForm] = useState(false);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [income, setIncome] = useState(0);
+  const [currentTerm, setCurrentTerm] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +34,22 @@ export default function Expenses() {
       [name]: value,
     }));
   };
+
+  //get current term details
+  const getCurrentTerm = () => {
+    axios
+      .get("http://localhost:3001/school/term/current")
+      .then((res) => {
+        setCurrentTerm(res.data);
+        // setYear(res.data.year);
+        // setTerm(res.data.term);
+        // console.log(currentTerm);
+      })
+      .catch((err) => console.error("Failed to load current term", err));
+  };
+  useEffect(() => {
+    getCurrentTerm();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -191,6 +209,41 @@ export default function Expenses() {
           </div>
         </div>
       </header>
+
+      {/* Current Term Card */}
+      {currentTerm && (
+        <div className="mb-8 mt-16 p-5 bg-blue-50 rounded-lg border border-blue-100">
+          <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
+            <FiInfo className="mr-2" />
+            Current Active Term
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-gray-600">Term Period</p>
+              <p className="font-medium">
+                Term {currentTerm.term}, {currentTerm.year}
+              </p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-gray-600">Date Range</p>
+              <p className="font-medium">
+                {new Date(currentTerm.startDate).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}{" "}
+                -{" "}
+                {new Date(currentTerm.endDate).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Financial Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-16 ">
         <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
@@ -276,33 +329,36 @@ export default function Expenses() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {expenses.length > 0 ? (
-              expenses.map((expense) => (
-                <tr key={expense._id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {expense.date
-                      ? new Date(expense.date).toLocaleDateString()
-                      : "N/A"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {expense.name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <span className="font-semibold">GH₵</span>
-                    {parseFloat(expense.amount).toFixed(2)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button
-                      onClick={() => handleExpenseDelete(expense._id)}
-                      className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50 transition-colors"
-                      title="Delete"
-                      disabled={addExpenseForm}
-                    >
-                      <FiTrash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))
+            {expenses.length > 0 &&
+            expenses.some((exp) => exp.name || exp.amount > 0) ? (
+              expenses
+                .filter((exp) => exp.name || exp.amount > 0) // Filter out empty expenses
+                .map((expense) => (
+                  <tr key={expense._id}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {expense.date
+                        ? new Date(expense.date).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {expense.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span className="font-semibold">GH₵</span>
+                      {parseFloat(expense.amount).toFixed(2)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <button
+                        onClick={() => handleExpenseDelete(expense._id)}
+                        className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50 transition-colors"
+                        title="Delete"
+                        disabled={addExpenseForm}
+                      >
+                        <FiTrash2 size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
             ) : (
               <tr>
                 <td
