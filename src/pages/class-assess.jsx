@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SidebarOther from "../other-components/sidebar-other";
 import {
@@ -12,7 +12,6 @@ import {
   FiX,
   FiCheck,
 } from "react-icons/fi";
-import { div } from "framer-motion/client";
 
 const ClassAssess = () => {
   const [classes, setClasses] = useState([]);

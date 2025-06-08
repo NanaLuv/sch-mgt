@@ -9,8 +9,6 @@ import Dashboard from "./pages/dashboard";
 import Students from "./pages/students";
 import Classes from "./pages/class-fees";
 import Settings from "./pages/settings";
-import Sidebar from "./other-components/sidebar";
-import TopBar from "./topbar";
 import FeeCollection from "./pages/fee-collection";
 import { ToastContainer } from "react-toastify";
 import ClassAssess from "./pages/class-assess";

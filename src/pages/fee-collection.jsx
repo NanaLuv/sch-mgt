@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
 import axios from "axios";
 import Sidebar from "../other-components/sidebar";
 import { FaMoneyBillWave, FaHistory, FaSms } from "react-icons/fa"; // Import Icons

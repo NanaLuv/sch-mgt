@@ -21,7 +21,7 @@ import Sidebar from "../other-components/sidebar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StatCard from "../other-components/stat-card";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [students, setStudents] = useState([]);

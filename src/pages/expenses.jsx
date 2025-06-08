@@ -41,9 +41,6 @@ export default function Expenses() {
       .get("http://localhost:3001/school/term/current")
       .then((res) => {
         setCurrentTerm(res.data);
-        // setYear(res.data.year);
-        // setTerm(res.data.term);
-        // console.log(currentTerm);
       })
       .catch((err) => console.error("Failed to load current term", err));
   };

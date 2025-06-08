@@ -1,7 +1,6 @@
 // 📦 Dependencies
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { div } from "framer-motion/client";
 import Sidebar from "../other-components/sidebar";
 import {
   FiCalendar,
@@ -9,7 +8,6 @@ import {
   FiEdit2,
   FiCheckCircle,
   FiChevronDown,
-  FiUsers,
 } from "react-icons/fi";
 
 export default function Academics() {

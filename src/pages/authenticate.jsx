@@ -3,13 +3,11 @@ import { useState } from "react";
 import {
   FiCheckCircle,
   FiAlertCircle,
-  FiGoogle,
-  FiGithub,
   FiUser,
   FiLock,
   FiUserPlus
 } from "react-icons/fi";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Authentication() {
   const [username, setUsername] = useState(null);

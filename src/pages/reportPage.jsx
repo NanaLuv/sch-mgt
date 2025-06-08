@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import { FaTimes } from "react-icons/fa";
 import { FiInfo, FiUser, FiFileText, FiX, FiCalendar } from "react-icons/fi";
 
 export default function ReportPage() {

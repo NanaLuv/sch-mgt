@@ -9,7 +9,6 @@ import {
   FiSettings,
   FiMenu,
   FiX,
-  FiDribbble,
   FiBriefcase,
 } from "react-icons/fi";
 import { FaSchool } from "react-icons/fa";
