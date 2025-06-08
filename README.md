@@ -65,4 +65,4 @@ A comprehensive web-based School Management System designed to streamline school
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/sch-mgt.git
+   git clone https://github.com/NanaLuv/sch-mgt.git
