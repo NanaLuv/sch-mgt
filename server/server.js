@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/school", router);
 
+// DB Connection
 mongoose
   .connect(mongoURL)
   .then((result) => {
