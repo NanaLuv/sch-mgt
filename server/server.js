@@ -12,12 +12,16 @@ const app = express();
 //middleware
 app.use(express.json());
 // Configure CORS
+const allowedOrigins = [
+  "https://schools-management-system.vercel.app",
+  "http://localhost:3000", // For development
+];
 
 app.use(
   cors({
-    origin: "https://schools-management-system.vercel.app", //  Vercel URL
-    // "http://localhost:3000", //  local development
-    credentials: true,
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    // credentials: true, // If using cookies/auth
   })
 );
 app.use("/school", router);
