@@ -14,7 +14,7 @@ app.use(express.json());
 // Configure CORS
 const corsOptions = {
   origin: [
-    "https://schools-management-system-jys55fo0o-nana-loves-projects.vercel.app", //  Vercel URL
+    "https://schools-management.vercel.app", //  Vercel URL
     "http://localhost:3000", //  local development
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
