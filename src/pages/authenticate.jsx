@@ -24,7 +24,7 @@ export default function Authentication() {
     setPasswordError();
     setUserError();
     axios
-      .post(`${API_BASE}school/user-signup`, {
+      .post(`${API_BASE}/school/user-signup`, {
         username,
         password,
       })
