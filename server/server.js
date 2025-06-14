@@ -13,12 +13,13 @@ const app = express();
 app.use(express.json());
 // Configure CORS
 
-app.use(cors({
-  origin:
-  "https://schools-management-system.vercel.app", //  Vercel URL
-  // "http://localhost:3000", //  local development
-  credentials:true
-}));
+app.use(
+  cors({
+    origin: "https://schools-management-system.vercel.app", //  Vercel URL
+    // "http://localhost:3000", //  local development
+    credentials: true,
+  })
+);
 app.use("/school", router);
 
 // DB Connection
