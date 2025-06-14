@@ -5,7 +5,7 @@ import {
   FiAlertCircle,
   FiUser,
   FiLock,
-  FiUserPlus
+  FiUserPlus,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export default function Authentication() {
     setPasswordError();
     setUserError();
     axios
-      .post(`${API_BASE}/school/user-signup`, {
+      .post(`${API_BASE}school/user-signup`, {
         username,
         password,
       })
@@ -53,9 +53,7 @@ export default function Authentication() {
       {/* Brand Section - Left Side */}
       <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-md">
         <div className="mb-6">
-          <h1 className="text-4xl font-bold text-blue-600 mb-2">
-            Love TechS
-          </h1>
+          <h1 className="text-4xl font-bold text-blue-600 mb-2">Love TechS</h1>
           <h4 className="text-xl text-gray-700">School Management System</h4>
         </div>
 
