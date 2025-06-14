@@ -67,6 +67,9 @@ const Settings = () => {
     reference: "",
   });
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   // Sections data
   const tabs = {
     "General Information": {
@@ -250,7 +253,7 @@ const Settings = () => {
     setLoading(true);
     setNotification(null);
     axios
-      .post(`http://localhost:3001/school/${endpoint}`, formData)
+      .post(`${API_BASE}/school/${endpoint}`, formData)
       .then((result) => {
         if (result.data) {
           console.log(result.data);
@@ -305,7 +308,7 @@ const Settings = () => {
     if (activeSection) {
       axios
         .get(
-          `http://localhost:3001/school/${activeSection
+          `${API_BASE}/school/${activeSection
             .toLowerCase()
             .replace(/\s+/g, "")}`
         )
@@ -332,7 +335,7 @@ const Settings = () => {
     if (activeSection) {
       axios
         .get(
-          `http://localhost:3001/school/subject-names/${activeSection.toLowerCase()}`
+          `${API_BASE}/school/subject-names/${activeSection.toLowerCase()}`
         )
         .then((result) => {
           if (result) {
@@ -350,7 +353,7 @@ const Settings = () => {
     if (activeSection) {
       axios
         .get(
-          `http://localhost:3001/school/classes-subjects/${activeSection.toLowerCase()}`
+          `${API_BASE}/school/classes-subjects/${activeSection.toLowerCase()}`
         )
         .then((result) => {
           if (result) {
@@ -375,7 +378,7 @@ const Settings = () => {
     if (activeSection) {
       axios
         .get(
-          `http://localhost:3001/school/classes-bills/${activeSection
+          `${API_BASE}/school/classes-bills/${activeSection
             .toLowerCase()
             .replace(/\s+/g, "")}`
         )
@@ -403,7 +406,7 @@ const Settings = () => {
   useEffect(() => {
     if (activeSection) {
       axios
-        .get(`http://localhost:3001/school/t/${activeSection.toLowerCase()}`)
+        .get(`${API_BASE}/school/t/${activeSection.toLowerCase()}`)
         .then((result) => {
           if (result) {
             console.log("teacher names", result.data);
@@ -431,7 +434,7 @@ const Settings = () => {
     if (activeSection) {
       axios
         .get(
-          `http://localhost:3001/school/fs/${activeSection
+          `${API_BASE}/school/fs/${activeSection
             .toLowerCase()
             .replace(/\s+/g, "")}`
         )
@@ -462,7 +465,7 @@ const Settings = () => {
     if (formVisibility) {
       axios
         .get(
-          `http://localhost:3001/school/${activeSection
+          `${API_BASE}/school/${activeSection
             .toLowerCase()
             .replace(/\s+/g, "")}`
         )
@@ -483,7 +486,7 @@ const Settings = () => {
     setLoading(true);
     setNotification(null);
     axios
-      .put(`http://localhost:3001/school/${endpoint}/${formData.id}`, formData)
+      .put(`${API_BASE}/school/${endpoint}/${formData.id}`, formData)
       .then((result) => {
         if (result.data) {
           console.log(result.data);
@@ -542,7 +545,7 @@ const Settings = () => {
         if (result.isConfirmed) {
           axios
             .delete(
-              `http://localhost:3001/school/${activeSection
+              `${API_BASE}/school/${activeSection
                 .toLowerCase()
                 .replace(/\s+/g, "")}/${id}`
             )

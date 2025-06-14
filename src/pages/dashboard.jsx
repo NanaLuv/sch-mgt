@@ -47,6 +47,9 @@ const Dashboard = () => {
   const [endDate, setEndDate] = useState(null);
   const [startDate, setStartDate] = useState(null);
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   //fetch term and year
 
   //get current term details
@@ -57,7 +60,7 @@ const Dashboard = () => {
     const localYear = localStorage.getItem("year");
 
     axios
-      .get("http://localhost:3001/school/term/current")
+      .get(`${API_BASE}/school/term/current`)
       .then((res) => {
         const apiStart = res.data.startDate;
         const apiEnd = res.data.endDate;
@@ -115,7 +118,7 @@ const Dashboard = () => {
     if (!isActive) return;
     setIsSwitching(true);
     axios
-      .post("http://localhost:3001/school/student/newfees")
+      .post(`${API_BASE}/school/student/newfees`)
       .then((res) => {
         toast.success("Term Switched Successfully");
         setIsActive(false);
@@ -134,7 +137,7 @@ const Dashboard = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3001/school/get-students")
+      .get(`${API_BASE}/school/get-students`)
       .then((response) => {
         setStudents(response.data);
         console.log(students);
@@ -149,7 +152,7 @@ const Dashboard = () => {
 
     //get teachers
     axios
-      .get("http://localhost:3001/school/teachers")
+      .get(`${API_BASE}/school/teachers`)
       .then((response) => {
         setTeachers(response.data);
         console.log(teachers);
@@ -164,7 +167,7 @@ const Dashboard = () => {
 
     //get classes
     axios
-      .get("http://localhost:3001/school/class")
+      .get(`${API_BASE}/school/class`)
       .then((response) => {
         setClasses(response.data);
         console.log(classes);
@@ -179,7 +182,7 @@ const Dashboard = () => {
 
     //get fees
     axios
-      .get("http://localhost:3001/school/fees")
+      .get(`${API_BASE}/school/fees`)
       .then((response) => {
         setFees(response.data);
         console.log(fees);

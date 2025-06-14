@@ -27,6 +27,9 @@ export default function Expenses() {
   const [income, setIncome] = useState(0);
   const [currentTerm, setCurrentTerm] = useState(null);
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -38,7 +41,7 @@ export default function Expenses() {
   //get current term details
   const getCurrentTerm = () => {
     axios
-      .get("http://localhost:3001/school/term/current")
+      .get(`${API_BASE}/school/term/current`)
       .then((res) => {
         setCurrentTerm(res.data);
       })
@@ -52,7 +55,7 @@ export default function Expenses() {
     e.preventDefault();
     setAddExpenseForm(true);
     axios
-      .post("http://localhost:3001/school/expenses", formData)
+      .post(`${API_BASE}/school/expenses`, formData)
       .then((res) => {
         setNotification({
           type: "success",
@@ -86,7 +89,7 @@ export default function Expenses() {
   //get expenses
   const getExpenses = () => {
     axios
-      .get("http://localhost:3001/school/get-expenses")
+      .get(`${API_BASE}/school/get-expenses`)
       .then((res) => {
         setExpenses(res.data);
       })
@@ -99,7 +102,7 @@ export default function Expenses() {
   //get total expenses
   const getTotalExpenses = () => {
     axios
-      .get("http://localhost:3001/school/total-expenses")
+      .get(`${API_BASE}/school/total-expenses`)
       .then((res) => {
         setTotalExpenses(res.data);
         console.log(totalExpenses);
@@ -115,7 +118,7 @@ export default function Expenses() {
   //total income
   const totalIncome = () => {
     axios
-      .get("http://localhost:3001/school/fees")
+      .get(`${API_BASE}/school/fees`)
       .then((res) => {
         setIncome(res.data);
         console.log(res.data);
@@ -141,7 +144,7 @@ export default function Expenses() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3001/school/expense/${id}`)
+          .delete(`${API_BASE}/school/expense/${id}`)
           .then((result) => {
             Swal.fire("Deleted!", "The item has been deleted.", "success");
             getExpenses();

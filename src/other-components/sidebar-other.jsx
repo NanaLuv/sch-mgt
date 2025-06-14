@@ -7,10 +7,7 @@ const SidebarOther = ({heading}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    // { name: "Dashboard", path: "/", icon: <AiFillDashboard size={20} /> },
-    // { name: "Students", path: "/students", icon: <FaUserGraduate size={20} /> },
-    // { name: "Classes", path: "/classes", icon: <MdClass size={20} /> },
-    // { name: "Settings", path: "/settings", icon: <FiSettings size={20} /> },
+   
     {
       name: "Assessment",
       path: "/class-assess",

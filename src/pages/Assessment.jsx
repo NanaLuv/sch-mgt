@@ -25,6 +25,9 @@ const Assessment = () => {
   const [inputError, setInputError] = useState("");
   const [process, setProcess] = useState(false);
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   //score input change
   const handleScoreChange = (studentId, type, value) => {
     if (value === 0 || (!isNaN(value) && Number(value) <= 50)) {
@@ -45,7 +48,7 @@ const Assessment = () => {
     setLoading(true);
     axios
       .get(
-        `http://localhost:3001/school/students/class-assess/${encodeURIComponent(
+        `${API_BASE}/school/students/class-assess/${encodeURIComponent(
           decodedClassName
         )}`
       )
@@ -87,7 +90,7 @@ const Assessment = () => {
   const handleSave = () => {
     setProcess(true);
     axios
-      .post("http://localhost:3001/school/students/save-scores", {
+      .post(`${API_BASE}/school/students/save-scores`, {
         subject: selectedSubject,
         scores,
       })
@@ -103,7 +106,7 @@ const Assessment = () => {
         //  Re-fetch updated student scores immediately
         axios
           .get(
-            `http://localhost:3001/school/students/class-assess/${encodeURIComponent(
+            `${API_BASE}/school/students/class-assess/${encodeURIComponent(
               decodedClassName
             )}`
           )

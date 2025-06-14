@@ -39,6 +39,9 @@ const FeeCollection = () => {
   const [method, setMethod] = useState("Cash");
   const [reference, setReference] = useState("");
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   // Framer Motion animation variants for modal
   const modalVariants = {
     hidden: { opacity: 0, y: "-50%", scale: 0.8 },
@@ -94,7 +97,7 @@ const FeeCollection = () => {
     }
     axios
       .post(
-        `http://localhost:3001/school/pay-fee/${selectedStudent.studentId}`,
+        `${API_BASE}/school/pay-fee/${selectedStudent.studentId}`,
         {
           amount: Number(amount),
           method,
@@ -120,7 +123,7 @@ const FeeCollection = () => {
   const fetchFeesData = (selectedClass) => {
     axios
       .get(
-        `http://localhost:3001/school/students/class-fee/${encodeURIComponent(
+        `${API_BASE}/school/students/class-fee/${encodeURIComponent(
           selectedClass
         )}`
       )

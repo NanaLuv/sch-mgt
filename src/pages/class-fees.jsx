@@ -18,9 +18,12 @@ const Classes = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   useEffect(() => {
     axios
-      .get("http://localhost:3001/school/class")
+      .get(`${API_BASE}/school/class`)
       .then((response) => {
         setClasses(response.data); //  Store classes
         console.log(classes);

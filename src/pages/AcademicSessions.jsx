@@ -19,10 +19,13 @@ export default function Academics() {
   const [message, setMessage] = useState("");
   const [newTerm, setNewTerm] = useState();
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   //get current term details
   const getCurrentTerm = () => {
     axios
-      .get("http://localhost:3001/school/term/current")
+      .get(`${API_BASE}/school/term/current`)
       .then((res) => {
         setCurrentTerm(res.data);
         setYear(res.data.year);
@@ -40,7 +43,7 @@ export default function Academics() {
       return alert("all fields required");
     }
     axios
-      .post("http://localhost:3001/school/term/switch", {
+      .post(`${API_BASE}/school/term/switch`, {
         year,
         term,
         startDate,

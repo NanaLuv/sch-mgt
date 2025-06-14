@@ -48,6 +48,9 @@ const Students = () => {
   const [studentsPerPage, setStudentsPerPage] = useState(5); // Default: 5 per page
   const [searchQuery, setSearchQuery] = useState("");
 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
+
   //handleInputChange
   const handleInputChange = (e, setForm) => {
     const { name, value } = e.target;
@@ -105,7 +108,7 @@ const Students = () => {
   //fetch class from the api[get the names]
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/school/student-classes`)
+      .get(`${API_BASE}/school/student-classes`)
       .then((result) => {
         if (result) {
           setAllClasses(result.data);
@@ -123,7 +126,7 @@ const Students = () => {
     setNotification(null);
     console.log("students data", students);
     axios
-      .post("http://localhost:3001/school/add-student", students)
+      .post("${API_BASE}/school/add-student", students)
       .then((result) => {
         console.log(result.data);
         setNotification({
@@ -158,7 +161,7 @@ const Students = () => {
   const getAllStudents = () => {
     setLoading(true);
     axios
-      .get("http://localhost:3001/school/get-students")
+      .get("${API_BASE}/school/get-students")
       .then((result) => {
         const studentData = result.data.map((student) => ({
           id: student._id,
@@ -185,7 +188,7 @@ const Students = () => {
   //close button refreshes and get all students in the table
   function handleClose() {
     axios
-      .get("http://localhost:3001/school/get-students")
+      .get("${API_BASE}/school/get-students")
       .then((result) => {
         const studentData = result.data.map((student) => ({
           id: student._id,
@@ -210,7 +213,7 @@ const Students = () => {
     setLoading(true);
     setNotification(null);
     axios
-      .put(`http://localhost:3001/school/${endpoint}/${formData.id}`, formData)
+      .put(`${API_BASE}/school/${endpoint}/${formData.id}`, formData)
       .then((result) => {
         console.log(result.data);
         setNotification({
@@ -254,7 +257,7 @@ const Students = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3001/school/delete/${id}`)
+          .delete(`${API_BASE}/school/delete/${id}`)
           .then((result) => {
             Swal.fire("Deleted!", "The item has been deleted.", "success");
             getAllStudents();
