@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(cors({
   origin:
-  "https://schools-management.vercel.app", //  Vercel URL
+  "https://schools-management-system.vercel.app", //  Vercel URL
   // "http://localhost:3000", //  local development
   credentials:true
 }));
