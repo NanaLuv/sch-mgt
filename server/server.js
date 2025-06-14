@@ -11,7 +11,17 @@ const app = express();
 
 //middleware
 app.use(express.json());
-app.use(cors());
+// Configure CORS
+const corsOptions = {
+  origin: [
+    "https://schools-management-system-jys55fo0o-nana-loves-projects.vercel.app", //  Vercel URL
+    "http://localhost:3000", //  local development
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use("/school", router);
 
 // DB Connection
