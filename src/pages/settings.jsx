@@ -4,7 +4,7 @@ import { AiOutlinePlus, AiFillEdit, AiFillDelete } from "react-icons/ai";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Sidebar from "../other-components/sidebar";
-import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
+import { FiAlertCircle, FiCheckCircle, FiLoader } from "react-icons/fi";
 import Notification from "../other-components/notification";
 
 const Settings = () => {
@@ -69,13 +69,12 @@ const Settings = () => {
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-
   // Sections data
   const tabs = {
     "General Information": {
       "School Info": ["School Name", "Address", "Email", "Contact", "Action"],
-      Class: ["Class Name", "Description", "Code", "Action"],
       Subjects: ["Subject Name", "Short Name", "Action"],
+      Class: ["Class Name", "Description", "Code", "Action"],
       Teachers: ["Teacher Name", "Subject", "Class", "Contact", "Action"],
     },
     Financials: {
@@ -256,7 +255,6 @@ const Settings = () => {
       .post(`${API_BASE}/school/${endpoint}`, formData)
       .then((result) => {
         if (result.data) {
-          console.log(result.data);
           setNotification({
             message: "Saved successfully!",
             type: "success",
@@ -315,7 +313,6 @@ const Settings = () => {
         .then((result) => {
           if (result) {
             setTableData(result.data);
-            console.log("Fetched Data:", result.data);
             return;
           }
         })
@@ -325,21 +322,13 @@ const Settings = () => {
     }
   }, [activeSection]);
 
-  // Log tableData  it's updated
-  useEffect(() => {
-    console.log("Updated tableData:", tableData);
-  }, [tableData]);
-
   //get subject names for class forms
   useEffect(() => {
     if (activeSection) {
       axios
-        .get(
-          `${API_BASE}/school/subject-names/${activeSection.toLowerCase()}`
-        )
+        .get(`${API_BASE}/school/subject-names/${activeSection.toLowerCase()}`)
         .then((result) => {
           if (result) {
-            console.log("subjects:", result.data);
             setSubjectNames(result.data);
             return;
           }
@@ -368,11 +357,6 @@ const Settings = () => {
     }
   }, [activeSection]);
 
-  useEffect(() => {
-    console.log("fetched classes", allClasses);
-    console.log("fetched subjects", allSubjects);
-  }, [allClasses, allSubjects]);
-
   //get both class and bills to update class and bill state
   useEffect(() => {
     if (activeSection) {
@@ -397,11 +381,6 @@ const Settings = () => {
     }
   }, [activeSection]);
 
-  useEffect(() => {
-    console.log("fetched classes", allClasses);
-    console.log("fetched bills", allBills);
-  }, [allClasses, allBills]);
-
   //get teachers with subject, class names
   useEffect(() => {
     if (activeSection) {
@@ -409,7 +388,6 @@ const Settings = () => {
         .get(`${API_BASE}/school/t/${activeSection.toLowerCase()}`)
         .then((result) => {
           if (result) {
-            console.log("teacher names", result.data);
             const formattedTeachers = result.data.map((teacher) => ({
               id: teacher._id,
               name: teacher.name,
@@ -425,10 +403,6 @@ const Settings = () => {
     }
   }, [activeSection]);
 
-  useEffect(() => {
-    console.log("fetched teacher data", teacherData);
-  }, [teacherData]);
-
   //get fee structure with bills and class names
   useEffect(() => {
     if (activeSection) {
@@ -440,7 +414,6 @@ const Settings = () => {
         )
         .then((response) => {
           if (response) {
-            console.log("fee structure names", response.data);
             const formattedBills = response.data.map((feeStr) => ({
               id: feeStr._id,
               className: feeStr.class.map((clsName) => clsName.name),
@@ -454,10 +427,6 @@ const Settings = () => {
         .catch((error) => console.error("Error:", error));
     }
   }, [activeSection]);
-
-  useEffect(() => {
-    console.log("fetched fee structure data", feeStructureData);
-  }, [feeStructureData]);
 
   //handle close for subjects
   const handleClose = (section) => {
@@ -747,26 +716,7 @@ const Settings = () => {
                       >
                         {loading ? (
                           <span className="flex items-center justify-center">
-                            <svg
-                              className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                              ></circle>
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                              ></path>
-                            </svg>
+                            <FiLoader className="animate-spin size" size={20} />
                             Saving...
                           </span>
                         ) : (
@@ -835,8 +785,9 @@ const Settings = () => {
                       >
                         {loading ? (
                           <div className="flex items-center gap-2">
-                            <div className="border-4 border-t-4 border-white rounded-full w-5 h-5 animate-spin"></div>
-                            Processing...
+                            {/* <div className="border-4 border-t-4 border-white rounded-full w-5 h-5 animate-spin"></div> */}
+                            <FiLoader className="animate-spin" size={20} />
+                            Saving...
                           </div>
                         ) : (
                           "Save"
@@ -973,9 +924,22 @@ const Settings = () => {
                       </button>
                       <button
                         type="submit"
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
+                        className={`px-4 py-2 rounded-md text-white font-medium ${
+                          loading
+                            ? "bg-gray-400"
+                            : "bg-blue-600 hover:bg-blue-700"
+                        }`}
+                        disabled={loading}
                       >
-                        Save
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            {/* <div className="border-4 border-t-4 border-white rounded-full w-5 h-5 animate-spin"></div> */}
+                            <FiLoader className="animate-spin" size={20} />{" "}
+                            Saving...
+                          </div>
+                        ) : (
+                          "Save"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -1113,9 +1077,22 @@ const Settings = () => {
                       </button>
                       <button
                         type="submit"
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
+                        className={`px-4 py-2 rounded-md text-white font-medium ${
+                          loading
+                            ? "bg-gray-400"
+                            : "bg-blue-600 hover:bg-blue-700"
+                        }`}
+                        disabled={loading}
                       >
-                        Save
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            {/* <div className="border-4 border-t-4 border-white rounded-full w-5 h-5 animate-spin"></div> */}
+                            <FiLoader className="animate-spin" size={20} />
+                            Saving...
+                          </div>
+                        ) : (
+                          "Save"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -1751,7 +1728,14 @@ const Settings = () => {
                         type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
                       >
-                        Save
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <FiLoader className="animate-spin" size={20} />
+                            Saving...
+                          </div>
+                        ) : (
+                          "Save"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -1863,7 +1847,14 @@ const Settings = () => {
                         type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
                       >
-                        Save
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <FiLoader className="animate-spin" size={20} />
+                            Saving...
+                          </div>
+                        ) : (
+                          "Save"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -1920,7 +1911,14 @@ const Settings = () => {
                         type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
                       >
-                        Update
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <FiLoader className="animate-spin" size={20} />
+                            Updating...
+                          </div>
+                        ) : (
+                          "Update"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -2047,7 +2045,14 @@ const Settings = () => {
                         type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
                       >
-                        Update
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <FiLoader className="animate-spin" size={20} />
+                            Updating...
+                          </div>
+                        ) : (
+                          "Update"
+                        )}
                       </button>
                     </div>
                   </form>

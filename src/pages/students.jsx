@@ -50,7 +50,6 @@ const Students = () => {
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-
   //handleInputChange
   const handleInputChange = (e, setForm) => {
     const { name, value } = e.target;
@@ -124,9 +123,8 @@ const Students = () => {
     setStudentError("");
     setLoading(true);
     setNotification(null);
-    console.log("students data", students);
     axios
-      .post("${API_BASE}/school/add-student", students)
+      .post(`${API_BASE}/school/add-student`, students)
       .then((result) => {
         console.log(result.data);
         setNotification({
@@ -215,7 +213,6 @@ const Students = () => {
     axios
       .put(`${API_BASE}/school/${endpoint}/${formData.id}`, formData)
       .then((result) => {
-        console.log(result.data);
         setNotification({
           message: "updated successfully!",
           type: "success",
@@ -562,9 +559,22 @@ const Students = () => {
                       </button>
                       <button
                         type="submit"
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className={`px-4 py-2 rounded-md text-white font-medium ${
+                          loading
+                            ? "bg-gray-400"
+                            : "bg-blue-600 hover:bg-blue-700"
+                        }`}
+                        disabled={loading}
                       >
-                        Save Student
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            {/* <div className="border-4 border-t-4 border-white rounded-full w-5 h-5 animate-spin"></div> */}
+                            <FiLoader className="animate-spin" size={20} />
+                            Saving...
+                          </div>
+                        ) : (
+                          "Save"
+                        )}
                       </button>
                     </div>
                   </form>
@@ -725,7 +735,14 @@ const Students = () => {
                         type="submit"
                         className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
                       >
-                        Update
+                        {loading ? (
+                          <div className="flex items-center gap-2">
+                            <FiLoader className="animate-spin" size={20} />
+                            Updating...
+                          </div>
+                        ) : (
+                          "Update"
+                        )}
                       </button>
                     </div>
                   </form>

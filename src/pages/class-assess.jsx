@@ -31,7 +31,6 @@ const ClassAssess = () => {
       .get(`${API_BASE}/school/class-assessment`) // Adjust API endpoint
       .then((response) => {
         setClasses(response.data); //  Store classes
-        console.log(classes);
         setLoading(false);
       })
       .catch((error) => {
@@ -41,9 +40,7 @@ const ClassAssess = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log("fetched classes", classes);
-  }, [classes]);
+
 
   if (loading)
     return (

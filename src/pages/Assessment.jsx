@@ -66,13 +66,13 @@ const Assessment = () => {
   }, [decodedClassName]);
 
   useEffect(() => {
-    console.log("fetched students", students);
+    
   }, [students]);
 
   //set, reset scores function
   useEffect(() => {
     if (!selectedSubject || students.length === 0) return;
-    console.log("Updated students after save:", students);
+     
 
     const newScores = {};
     students.forEach((student) => {

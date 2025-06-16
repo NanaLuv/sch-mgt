@@ -105,14 +105,12 @@ export default function Expenses() {
       .get(`${API_BASE}/school/total-expenses`)
       .then((res) => {
         setTotalExpenses(res.data);
-        console.log(totalExpenses);
-        console.log(res.data);
+        
       })
       .catch((error) => console.log(error));
   };
   useEffect(() => {
     getTotalExpenses();
-    console.log("all expense", totalExpenses);
   }, [totalExpenses]);
 
   //total income
@@ -121,14 +119,12 @@ export default function Expenses() {
       .get(`${API_BASE}/school/fees`)
       .then((res) => {
         setIncome(res.data);
-        console.log(res.data);
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     totalIncome();
-    console.log("income", income);
   }, [income]);
 
   //delete Expenses

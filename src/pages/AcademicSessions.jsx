@@ -30,7 +30,6 @@ export default function Academics() {
         setCurrentTerm(res.data);
         setYear(res.data.year);
         setTerm(res.data.term);
-        console.log(currentTerm);
       })
       .catch((err) => console.error("Failed to load current term", err));
   };
@@ -51,7 +50,6 @@ export default function Academics() {
       })
       .then((res) => {
         setNewTerm(res.data);
-        console.log(newTerm);
         getCurrentTerm();
         setMessage("Term switched successfully");
         setTimeout(() => setMessage(null), 3000);

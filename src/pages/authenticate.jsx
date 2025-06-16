@@ -6,6 +6,7 @@ import {
   FiUser,
   FiLock,
   FiUserPlus,
+  FiLoader,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +15,7 @@ export default function Authentication() {
   const [password, setPassword] = useState();
   const [userError, setUserError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const Navigate = useNavigate();
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
@@ -22,6 +24,7 @@ export default function Authentication() {
   const handleSigUP = (e) => {
     e.preventDefault();
     setPasswordError();
+    setLoading(true);
     setUserError();
     axios
       .post(`${API_BASE}/school/user-signup`, {
@@ -29,7 +32,6 @@ export default function Authentication() {
         password,
       })
       .then((res) => {
-        console.log(res.data);
         if (
           res.data.username === "teacher" &&
           res.data.password === "teacher123"
@@ -180,17 +182,25 @@ export default function Authentication() {
                 : "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             }`}
           >
-            Create Account
+            {loading ? (
+              <div className="flex items-center gap-2">
+                {/* <div className="border-4 border-t-4 border-white rounded-full w-5 h-5 animate-spin"></div> */}
+                <FiLoader className="animate-spin" size={20} />
+                Signing in
+              </div>
+            ) : (
+              "Sign in"
+            )}
           </button>
 
           <div className="text-center text-sm text-gray-500 pt-2">
-            Already have an account?{" "}
+            {/* Already have an account?{" "} */}
             <button
               type="button"
               // onClick={() => navigate("/login")}
               className="font-medium text-blue-600 hover:text-blue-500"
             >
-              Sign in
+              Create account
             </button>
           </div>
         </form>

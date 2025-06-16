@@ -123,13 +123,12 @@ const Dashboard = () => {
         toast.success("Term Switched Successfully");
         setIsActive(false);
         setIsSwitching(false);
-        console.log(res.data);
       })
       .catch((error) => {
         console.error("Failed to fetch reset fees:", error);
         toast.error("Failed to switch term");
       });
-    console.log({ startDate, endDate, prevDates });
+    
   }
 
   //api
@@ -140,7 +139,6 @@ const Dashboard = () => {
       .get(`${API_BASE}/school/get-students`)
       .then((response) => {
         setStudents(response.data);
-        console.log(students);
         setLoading(false);
       })
       .catch((error) => {
@@ -155,7 +153,6 @@ const Dashboard = () => {
       .get(`${API_BASE}/school/teachers`)
       .then((response) => {
         setTeachers(response.data);
-        console.log(teachers);
         setLoading(false);
       })
       .catch((error) => {
@@ -170,7 +167,6 @@ const Dashboard = () => {
       .get(`${API_BASE}/school/class`)
       .then((response) => {
         setClasses(response.data);
-        console.log(classes);
         setLoading(false);
       })
       .catch((error) => {
@@ -185,7 +181,6 @@ const Dashboard = () => {
       .get(`${API_BASE}/school/fees`)
       .then((response) => {
         setFees(response.data);
-        console.log(fees);
         setLoading(false);
       })
       .catch((error) => {
@@ -196,9 +191,7 @@ const Dashboard = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log("updated fees", fees);
-  }, [fees]);
+
 
   return (
     <div className="min-h-screen bg-gray-50">

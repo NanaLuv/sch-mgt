@@ -26,7 +26,6 @@ const Classes = () => {
       .get(`${API_BASE}/school/class`)
       .then((response) => {
         setClasses(response.data); //  Store classes
-        console.log(classes);
         setLoading(false);
       })
       .catch((error) => {
@@ -36,9 +35,6 @@ const Classes = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log("fetched classes", classes);
-  }, [classes]);
 
   // Framer Motion Page Animation Variants
   const pageVariants = {
