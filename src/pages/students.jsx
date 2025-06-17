@@ -159,7 +159,7 @@ const Students = () => {
   const getAllStudents = () => {
     setLoading(true);
     axios
-      .get("${API_BASE}/school/get-students")
+      .get(`${API_BASE}/school/get-students`)
       .then((result) => {
         const studentData = result.data.map((student) => ({
           id: student._id,
@@ -186,7 +186,7 @@ const Students = () => {
   //close button refreshes and get all students in the table
   function handleClose() {
     axios
-      .get("${API_BASE}/school/get-students")
+      .get(`${API_BASE}/school/get-students`)
       .then((result) => {
         const studentData = result.data.map((student) => ({
           id: student._id,
