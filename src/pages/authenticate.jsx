@@ -195,13 +195,13 @@ export default function Authentication() {
 
           <div className="text-center text-sm text-gray-500 pt-2">
             {/* Already have an account?{" "} */}
-            <button
+            {/* <button
               type="button"
               // onClick={() => navigate("/login")}
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               Create account
-            </button>
+            </button> */}
           </div>
         </form>
       </div>
