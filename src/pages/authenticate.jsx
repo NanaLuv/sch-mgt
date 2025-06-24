@@ -47,6 +47,7 @@ export default function Authentication() {
       .catch((err) => {
         setUserError(err.response?.data?.error?.username);
         setPasswordError(err.response?.data?.error?.password);
+        setLoading(false)
       });
   };
 
