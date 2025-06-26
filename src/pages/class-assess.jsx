@@ -74,7 +74,7 @@ const ClassAssess = () => {
     setTimeout(() => {
       if (codeInput === selectedClass.code) {
         navigate(
-          `${API_BASE}/assessment/${encodeURIComponent(selectedClass.name)}`
+          `/assessment/${encodeURIComponent(selectedClass.name)}`
         );
       } else {
         setErrorCode("Invalid access code. Please try again.");
