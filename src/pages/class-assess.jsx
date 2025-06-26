@@ -25,7 +25,6 @@ const ClassAssess = () => {
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-
   useEffect(() => {
     axios
       .get(`${API_BASE}/school/class-assessment`) // Adjust API endpoint
@@ -39,8 +38,6 @@ const ClassAssess = () => {
         setLoading(false);
       });
   }, []);
-
-
 
   if (loading)
     return (
@@ -76,7 +73,9 @@ const ClassAssess = () => {
     // Simulate API verification
     setTimeout(() => {
       if (codeInput === selectedClass.code) {
-        navigate(`/assessment/${encodeURIComponent(selectedClass.name)}`);
+        navigate(
+          `${API_BASE}/assessment/${encodeURIComponent(selectedClass.name)}`
+        );
       } else {
         setErrorCode("Invalid access code. Please try again.");
       }
