@@ -27,7 +27,6 @@ const Assessment = () => {
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-
   //score input change
   const handleScoreChange = (studentId, type, value) => {
     if (value === 0 || (!isNaN(value) && Number(value) <= 50)) {
@@ -65,14 +64,11 @@ const Assessment = () => {
       });
   }, [decodedClassName]);
 
-  useEffect(() => {
-    
-  }, [students]);
+  useEffect(() => {}, [students]);
 
   //set, reset scores function
   useEffect(() => {
     if (!selectedSubject || students.length === 0) return;
-     
 
     const newScores = {};
     students.forEach((student) => {

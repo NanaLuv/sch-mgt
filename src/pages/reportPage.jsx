@@ -541,29 +541,29 @@ export default function ReportPage() {
   );
 }
 
-const styles = {
-  previewContainer: {
-    position: "fixed",
-    top: "10px",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: "1000",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  closeButton: {
-    marginBottom: "10px",
-    padding: "10px 20px",
-    fontSize: "16px",
-    cursor: "pointer",
-    zIndex: "1001",
-  },
-  iframe: {
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-  },
-};
+// const styles = {
+//   previewContainer: {
+//     position: "fixed",
+//     top: "10px",
+//     left: "0",
+//     width: "100%",
+//     height: "100%",
+//     backgroundColor: "rgba(0, 0, 0, 0.5)",
+//     zIndex: "1000",
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   closeButton: {
+//     marginBottom: "10px",
+//     padding: "10px 20px",
+//     fontSize: "16px",
+//     cursor: "pointer",
+//     zIndex: "1001",
+//   },
+//   iframe: {
+//     border: "1px solid #ccc",
+//     borderRadius: "8px",
+//   },
+// };

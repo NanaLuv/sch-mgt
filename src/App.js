@@ -33,7 +33,8 @@ function App() {
             path="/fees-collection/:className"
             element={<FeeCollection />}
           />
-          <Route path="/class-assess/" element={<ClassAssess />} />
+          <Route path="/class-assess" element={<ClassAssess />} />
+          <Route path="/settings/classes" element={<Settings />} />
           <Route path="/assessment/:className" element={<Assessment />} />
           <Route
             path="/assessment/report/:className"
@@ -42,7 +43,7 @@ function App() {
           <Route path="/academics" element={<Academics />} />
           <Route path="/" element={<Authentication />} />
           <Route path="/expenses" element={<Expenses />} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </AnimatePresence>
     );
