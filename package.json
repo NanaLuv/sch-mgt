@@ -20,8 +20,7 @@
     "react-tooltip": "^5.29.0",
     "sweetalert2": "^11.17.2",
     "web-vitals": "^4.2.4",
-    "xlsx": "^0.18.5",
-    "homepage": "."
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
