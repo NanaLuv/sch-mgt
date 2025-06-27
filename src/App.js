@@ -42,7 +42,7 @@ function App() {
           <Route path="/academics" element={<Academics />} />
           <Route path="/" element={<Authentication />} />
           <Route path="/expenses" element={<Expenses />} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </AnimatePresence>
     );
