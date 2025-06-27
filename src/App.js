@@ -24,7 +24,7 @@ function App() {
 
     return (
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
+        <Routes location={location} key={location.pathname} basename="/">
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/students" element={<Students />} />
           <Route path="/fees" element={<Classes />} />
@@ -42,6 +42,7 @@ function App() {
           <Route path="/academics" element={<Academics />} />
           <Route path="/" element={<Authentication />} />
           <Route path="/expenses" element={<Expenses />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
     );
