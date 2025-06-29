@@ -25,8 +25,10 @@ const Assessment = () => {
   const [inputError, setInputError] = useState("");
   const [process, setProcess] = useState(false);
 
-  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
-
+  // Safe access with fallback
+  const API_BASE = process.env.REACT_APP_API_URL ?? "http://localhost:3001";
+  console.log("API_BASE:", API_BASE); // Debugging
+  
   //score input change
   const handleScoreChange = (studentId, type, value) => {
     if (value === 0 || (!isNaN(value) && Number(value) <= 50)) {
