@@ -26,7 +26,7 @@ const Assessment = () => {
   const [process, setProcess] = useState(false);
 
   // Safe access with fallback
-  const API_BASE = process.env.REACT_APP_API_URL ?? "http://localhost:3001";
+  const API_BASE = "https://schools-manangement-system.onrender.com" || "http://localhost:3001";
   console.log("API_BASE:", API_BASE); // Debugging
   
   //score input change
