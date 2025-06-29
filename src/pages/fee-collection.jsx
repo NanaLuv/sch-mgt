@@ -41,7 +41,6 @@ const FeeCollection = () => {
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-
   // Framer Motion animation variants for modal
   const modalVariants = {
     hidden: { opacity: 0, y: "-50%", scale: 0.8 },
@@ -96,17 +95,13 @@ const FeeCollection = () => {
       return;
     }
     axios
-      .post(
-        `${API_BASE}/school/pay-fee/${selectedStudent.studentId}`,
-        {
-          amount: Number(amount),
-          method,
-          reference,
-        }
-      )
+      .post(`${API_BASE}/school/pay-fee/${selectedStudent.studentId}`, {
+        amount: Number(amount),
+        method,
+        reference,
+      })
       .then((response) => {
         toast.success("Payment success"); // Success toast
-        console.log(response.data);
         fetchFeesData(decodedClassName); // Refresh fee table after payment
         setAmount("");
         setMethod("Cash");
@@ -128,7 +123,6 @@ const FeeCollection = () => {
         )}`
       )
       .then((response) => {
-        console.log("fetched fees", response.data); //  Update Table with Fee Data
         setStudents(response.data); //  Update Table with Fee Data
         setHistory(response.data);
         setLoading(false);
