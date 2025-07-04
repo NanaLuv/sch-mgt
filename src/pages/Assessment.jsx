@@ -27,7 +27,6 @@ const Assessment = () => {
 
   // Safe access with fallback
   const API_BASE = "https://schools-manangement-system.onrender.com" || "http://localhost:3001";
-  console.log("API_BASE:", API_BASE); // Debugging
   
   //score input change
   const handleScoreChange = (studentId, type, value) => {

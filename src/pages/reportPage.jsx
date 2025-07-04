@@ -51,16 +51,13 @@ export default function ReportPage() {
     axios
       .get(`${API_BASE}/school/students/year-term`)
       .then((response) => {
-        // setYearTerm(response.data);
         setTerm(response.data.term);
         setYear(response.data.year);
       })
       .catch((error) => console.error("error occured", error));
   }, []);
 
-  useEffect(() => {
-    console.log({ report: reportDetails, schinfo: schoolInfo, term: term });
-  }, [reportDetails, schoolInfo]);
+
 
   const conductOptions = [
     "Excellent",
